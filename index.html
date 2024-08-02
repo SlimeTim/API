@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Point of Sale Interface</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Import thư viện jQuery -->
+</head>
+
+<body>
+  <header>
+  </header>
+
+  <main>
+    <section id="login-section">
+      <h2 id="title-login">Đăng nhập</h2>
+      <input type="text" id="username-input" placeholder="Tên người dùng">
+      <input type="password" id="password-input" placeholder="Mật khẩu">
+      <button id="login-button">Đăng nhập</button>
+    </section>
+    <section id="left">
+      <div class="search-area">
+        <span class="search-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+        </span>
+        <div class="searchinputandbutton">
+          <input type="text" id="search-input" class="search-input" placeholder="Search for products">
+        </div>
+        <button id="search-button">
+          <span id="search-icon">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnpO-86mVtEKCxzrxSfXpXTAh3hMRAegnhdg&s">
+          </span>
+        </button>
+      </div>
+      <h2 id="search-info">Tìm kiếm sản phẩm</h2>
+      <div class="quick-keys" id="quick-keys">
+      </div>
+      <p>Tìm kiếm sản phẩm yêu thích và bỏ vào giỏ hàng của bạn</p>
+    </section>
+
+    <section class="checkout">
+
+      <div class="totals">
+        <img src="cart.png" id="Infor">
+        <span id="product-name"></span>
+      </div>
+      <br>
+      <button id="pay-button">Thanh toán</button>
+    </section>
+  </main>
+
+  <script>
+    temp = [];
+    tempPrice = [];
+
+    // Handler cho sự kiện khi người dùng nhấp vào nút "Đăng nhập"
+    document.getElementById("login-button").addEventListener("click", function () {
+      // Lấy giá trị từ các trường nhập liệu
+      const username = document.getElementById("username-input").value || "test";
+      const password = document.getElementById("password-input").value || "12345678";
+
+      // Gửi yêu cầu đăng nhập đến API
+      const loginData = {
+        username: username,
+        password: password,
+      };
+
+      fetch("http://localhost:8090/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data?.message === "login successfully") {
+            document.getElementById("username-input").style.display = "none";
+            document.getElementById("password-input").style.display = "none";
+            document.getElementById("login-button").style.display = "none";
+            document.getElementById("title-login").style.display = "none";
+
+            // Tạo một phần tử mới
+            var newElement = document.createElement("label");
+            newElement.textContent = data?.fullname;
+
+            // Lấy phần tử cha để thêm vào
+            var parentElement = document.getElementById("login-section");
+
+            // Thêm phần tử mới vào phần tử cha
+            parentElement.appendChild(newElement);
+
+          } else {
+            alert(data?.message);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+
+
+
+    const checkoutButton = document.getElementById('pay-button');
+
+    checkoutButton.addEventListener('click', () => {
+      productIds = []; // Khai báo và khởi tạo mảng productIds
+      productPrice = [];
+
+      productIds = temp;
+      productPrice = tempPrice;
+      // Gửi yêu cầu POST đến API endpoint
+      fetch('http://localhost:8090/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'
+        },
+        body: JSON.stringify({
+          productIds: productIds, // Gửi mảng productIds
+          username: tempName,
+        }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Xử lý phản hồi từ API sau khi gửi thành công
+          console.log(data);
+        })
+        .catch(error => {
+          // Xử lý lỗi nếu có
+          console.error(error);
+        });
+    });
+
+    const searchButton = document.getElementById('search-button');
+
+    const quickKeys = document.getElementById('quick-keys');
+
+    fetch('http://localhost:8090/api/getAllProduct')
+      .then((res) => { return res.json(); })
+      .then((res) => { 
+        quickKeys.innerHTML = '';
+        const dataArray = res[0];
+        dataArray.forEach((product) => {
+          const img = document.createElement('img');
+          const product_name = document.createElement('label');
+          const product_price = document.createElement('label');
+          product_name.textContent = "Name: " + product.product_name;
+          product_price.textContent = "Price: "+ product.price;
+          img.src = product.img_link;
+          quickKeys.appendChild(product_name);
+          quickKeys.appendChild(product_price);
+          quickKeys.appendChild(img);
+        })
+
+       })
+      .catch(error => console.log(error));
+
+    searchButton.addEventListener('click', async (event) => {
+      var searchInput = document.getElementById('search-input').value.trim();
+      if (searchInput.length > 0) {
+        try {
+          const response = await fetch(`http://localhost:8090/api/product/${searchInput}`);
+          const product = await response.json();
+
+          quickKeys.innerHTML = '';
+
+
+          const button = document.createElement('button');
+          button.textContent = product.name;
+          quickKeys.appendChild(button);
+          const img = document.createElement('img');
+          img.src = product.img_link;
+          quickKeys.appendChild(img);
+
+          button.addEventListener('click', () => {
+
+
+            const productsIds = [];
+            const productPrice = [];
+            productsIds.push(product.product_id);
+            temp = productsIds;
+            tempPrice = productPrice;
+
+            const totalsDiv = document.querySelector('.totals');
+            const previousContent = totalsDiv.innerHTML; // Get the existing content
+            const newContent = `${previousContent}<br>Product Name: ${product.name}<br>Pricing: ${product.price}`; // Append the new product information
+            totalsDiv.innerHTML = newContent; // Update the content of totalsDiv
+
+            // Hiển thị thông báo thành công
+            alert('Thêm vào giỏ hàng thành công');
+          });
+
+        } catch (error) {
+          console.error(error);
+          alert('Quá giới hạn số lần truy cập');
+        }
+      } else {
+        quickKeys.innerHTML = '';
+      }
+    });
+
+
+
+
+  </script>
+</body>
+
+</html>

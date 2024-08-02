@@ -1,0 +1,29 @@
+{
+  "name": "nodejsapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon api.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "connect-redis": "^7.1.1",
+    "cors": "^2.8.1",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0",
+    "express-session": "^1.18.0",
+    "mssql": "^6.2.1",
+    "rate-limit-redis": "^4.2.0",
+    "rate-limiter-flexible": "^5.0.3",
+    "redis": "^4.6.13",
+    "shortid": "^2.2.16"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "keywords": [],
+  "author": "Dhananjay Kumar <debugmode@outlook.com> (https://debugmode.net)",
+  "license": "ISC"
+}

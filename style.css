@@ -1,0 +1,308 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-grow: 1;
+  padding: 20px;
+  width: 100%;
+}
+
+section {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px;
+  width: 300px;
+}
+
+.search-area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.search-icon {
+  margin-right: 8px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+}
+
+.search-button {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.quick-keys {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  height: fit-content;
+}
+
+.quick-keys img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+.quick-keys button {
+  margin: 5px;
+  padding: 10px;
+  background-color: #eee;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.checkout {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.add-options {
+  margin-bottom: 20px;
+}
+
+.add-options button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.totals {
+  margin-top: 20px;
+}
+
+.totals p {
+  margin-bottom: 10px;
+}
+
+.pay-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.setup-button {
+  background-color: purple;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+/* Thay đổi màu nền và font chữ cho phần GIỎ HÀNG */
+.checkout {
+  background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
+}
+
+/* Căn giữa nội dung trong phần GIỎ HÀNG */
+.checkout-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+#searchinputandbutton{
+  display: flex;
+  flex-direction: row;
+}
+
+/* Thay đổi kiểu nút mua hàng */
+.purchase-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Thay đổi kiểu nút thêm khách hàng */
+.add-customer-button {
+  background-color: purple;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Thay đổi kiểu nút thanh toán */
+.pay-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Thay đổi kiểu nút setup */
+.setup-button {
+  background-color: purple;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.checkout {
+  height: 100vh; /* Chiều cao bằng 100% của viewport */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.checkout-content {
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+/* #Infor {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 10px;
+  background: linear-gradient(to right, #ff0000, #00ff00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+} */
+
+#search-info{
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 10px;
+  background: linear-gradient(to right, #ff0000, #00ff00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#left{
+  height: fit-content;
+}
+#Infor {
+  height: 200px; /* Set the desired height */
+  width: 200px;  /* Set the desired width */
+}
+#search-icon {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin-right: 5px;
+}
+
+#search-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+#login-section {
+  max-width: 300px;
+  margin: 0 auto;
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+#login-section h2 {
+  text-align: center;
+}
+
+#login-section input[type="text"],
+#login-section input[type="password"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+#login-section button {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#login-section button:hover {
+  background-color: #45a049;
+}
